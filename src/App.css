@@ -1,38 +1,62 @@
-.App {
+* {
   text-align: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: #16c748;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  text-align: center;
+  background-color:#0c1cc7;
+  padding: 30px;
+  margin-top: 0;
+  color: blanchedalmond;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+section {
+  color: red;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+form {
+  font-size: 2.1em;
+  height: 50px;
+  background-color: #c7a116;
+  padding: 20px;
+  max-width: max-content;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/* input {
+  height: 40px;
+} */
+
+button, input {
+  font-size: 1em;
+  background-color: #c71616;
+  height: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h3, h4{
+  background-color: #c70101;
+  /* max-width: 100%; */
+  font-size: 1.5em;
+  /* border: black solid 3px; */
+  padding: 30px;
+  margin-bottom: 0;
+  max-width: max-content;
+  margin: auto;
+
+}
+
+aside>img {
+  /* border: black 4px solid; */
+  padding: 10px;
+  background-color: black;
+  margin: 20px;
+}
+
+footer {
+  background-color:#0c1cc7;
+  padding: 30px;
 }
