@@ -49,13 +49,13 @@ class App extends React.Component {
     let weatherInfo = e.target.city_name.value;
     let myData = await axios.get(`http://localhost:3001/weather?city_name=${weatherInfo}`);
 
-    let myData2 = await axios.get(`http://localhost:3001/weather, {
-      params {
-        lat:
-        lon:
-        city:
-      }
-    }`);
+    // let myData2 = await axios.get(`http://localhost:3001/weather, {
+    //   params {
+    //     lat:
+    //     lon:
+    //     city:
+    //   }
+    // }`);
     console.log(myData.data)
 
     this.setState({
