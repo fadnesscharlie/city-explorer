@@ -6,11 +6,14 @@
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
+[Link to Netlify Application](https://nifty-wilson-350d48.netlify.app)
+
 Through this application you can search through the most popular cities, it then will display the Longitude, and Latitude. An image will appear as well.
 
 If you do not set your own key from LocationIQ, it will return an error.
 
 ## Getting Started
+
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? 
 -->
 
@@ -24,6 +27,8 @@ If you do not set your own key from LocationIQ, it will return an error.
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
+UML for starting City Explorer
+
 - React
 - React-BootStrap
 - Axios
@@ -31,6 +36,14 @@ If you do not set your own key from LocationIQ, it will return an error.
 - HTML
 - CSS
 - JSX
+
+### UML for Day 1
+
+<img src="src/img/UMI-Lab-06.png" >
+
+### UML for Day 2
+
+<img src="src/img/uml-city-explorer-2.png" >
 
 ## Change Log
 
@@ -56,3 +69,13 @@ Start time: 9:30pm 7/27/2021
 Finish time: 8:30pm 7/28/2021
 
 Actual time needed to complete: 3 Hours
+
+## Name of feature: Adding a Server
+
+Estimate of time needed to complete: 4 hours
+
+Start time: 1:45pm 7/31/2021
+
+Finish time:
+
+Actual time needed to complete:
