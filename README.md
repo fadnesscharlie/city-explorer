@@ -76,6 +76,6 @@ Estimate of time needed to complete: 4 hours
 
 Start time: 1:45pm 7/31/2021
 
-Finish time:
+Finish time: 8:30pm 8/1/2021
 
-Actual time needed to complete:
+Actual time needed to complete: 8 hours
