@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
+import Weather from './Weather.js';
 
 // npm i axios
-
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class App extends React.Component {
       name: '',
       src: '',
       weather: [],
+      weatherShow: true,
     };
   }
 
@@ -27,6 +28,7 @@ class App extends React.Component {
       //   Variable                get     server/wesbite
       let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`)
 
+      console.log('INside of Get City Info Method');
       this.setState({
         displayCity: true,
         lon: cityResults.data[0].lon,
@@ -43,25 +45,22 @@ class App extends React.Component {
     }
   }
 
-
   getData = async (e) => {
     e.preventDefault();
     let weatherInfo = e.target.city_name.value;
     let myData = await axios.get(`http://localhost:3001/weather?city_name=${weatherInfo}`);
-
-    // let myData2 = await axios.get(`http://localhost:3001/weather, {
-    //   params {
-    //     lat:
-    //     lon:
-    //     city:
-    //   }
-    // }`);
-    console.log(myData.data)
-
+    
+    console.log('3. my data.data ', myData.data)
+    
+    // debugger;
     this.setState({
       weather: myData.data,
     })
+    
   }
+  // renderWeather = () => {
+  //   this.setState({ weatherShow: true })
+  // }
 
   handleChange = (e) => {
     this.setState({ city: e.target.value })
@@ -74,17 +73,22 @@ class App extends React.Component {
 
         <form onSubmit={this.getData}>
           <input id="city_name" />
-        <button>Get Data</button>
-
+          <button onClick={this.handleChange}>Get Data</button>
         </form>
-          {this.state.weather.length !==0 
-          ? this.state.weather.map((weather, index) => <h3 key={index}>{weather.city_name}</h3>) 
-          : ''}
 
+        <Weather 
+        // renderWeather={this.renderWeather} 
+        weather={this.state.weather}
+        />
+
+        {this.state.weather.length !== 0
+          ? this.state.weather.map((weather, index) => <h3 key={index}>{weather.date}</h3>)
+          : ''}
 
         <section>
           {this.state.renderError ? <h5>{this.state.errorMessage}</h5> : ''}
         </section>
+
         <form onSubmit={this.getCityInfo}>
           <input onChange={this.handleChange} />
           <button>Explore</button>
