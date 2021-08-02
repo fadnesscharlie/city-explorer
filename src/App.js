@@ -1,9 +1,10 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-
-// npm i axios
-
+import Weather from './Weather.js';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class App extends React.Component {
     e.preventDefault();
     try {
       //   Variable                get     server/wesbite
-      let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`)
+      let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`);
 
       this.setState({
         displayCity: true,
@@ -43,26 +44,24 @@ class App extends React.Component {
     }
   }
 
-
   getData = async (e) => {
-    e.preventDefault();
-    let weatherInfo = e.target.city_name.value;
-    let myData = await axios.get(`http://localhost:3001/weather?city_name=${weatherInfo}`);
+    try {
+      e.preventDefault();
+      let weatherInfo = e.target.city_name.value;
+      let myData = await axios.get(`http://localhost:3001/weather?city_name=${weatherInfo}`);
+      this.setState({
+        weather: myData.data,
+      })
 
-    // let myData2 = await axios.get(`http://localhost:3001/weather, {
-    //   params {
-    //     lat:
-    //     lon:
-    //     city:
-    //   }
-    // }`);
-    console.log(myData.data)
-
-    this.setState({
-      weather: myData.data,
-    })
+    } catch (error) {
+      this.setState({
+        renderError: true,
+        errorMessage: `Error occcured: ${error.response.data.error}, Status: ${error.response.status}`,
+      })
+    }
   }
-
+  
+  // Updates city for Location Form
   handleChange = (e) => {
     this.setState({ city: e.target.value })
   };
@@ -72,33 +71,58 @@ class App extends React.Component {
       <>
         <h1>Welcome to City Explorer</h1>
 
-        <form onSubmit={this.getData}>
-          <input id="city_name" />
-        <button>Get Data</button>
+        {/* Form to ask the user on the three cities in our database */}
+        <Form className="form" onSubmit={this.getData}>
+          <Form.Group >
+            <Form.Label >Enter a City</Form.Label>
+            <Form.Control
+              className="formText"
+              type="text"
+              id="city_name"
+              placeholder='Please Enter onme of the three cities' />
+            <Form.Text
+              className="text-muted formText">Enter 'Seattle', 'Paris', or 'Amman'</Form.Text>
+            <Button type="submit" onClick={this.handleChange}>Enter</Button>
+          </Form.Group>
+        </Form>
 
-        </form>
-          {this.state.weather.length !==0 
-          ? this.state.weather.map((weather, index) => <h3 key={index}>{weather.city_name}</h3>) 
-          : ''}
-
-
+        {/* Weather component to display the three days of weather */}
+        <Weather
+          weather={this.state.weather}
+        />
+        
+        {/* Error message */}
         <section>
           {this.state.renderError ? <h5>{this.state.errorMessage}</h5> : ''}
         </section>
-        <form onSubmit={this.getCityInfo}>
-          <input onChange={this.handleChange} />
-          <button>Explore</button>
-        </form>
+
+        {/* Form to show the user different cities and their location */}
+        <Form className="form" onSubmit={this.getCityInfo}>
+          <Form.Group >
+            <Form.Label>Please Enter a City</Form.Label>
+            <Form.Control
+              className="formText"
+              onChange={this.handleChange}
+              placeholder='Please Enter a City' />
+            <Form.Text
+              className="text-muted formText">Enter a city to explore its location</Form.Text>
+            <Button type="submit">Explore</Button>
+          </Form.Group>
+        </Form>
+
         <article>
+          {/* If the user types a correct city, show the name */}
           {this.state.displayCity ? <h3>Your Chosen City: {this.state.name}</h3> : ''}
         </article>
         <aside>
+          {/* If the user types a correct city, show the name */}
           {this.state.displayCity ? <img
             src={this.state.src}
             alt="City"
           /> : ''}
         </aside>
         <article>
+          {/* If the user types a correct city, show the location through latitude and longitude */}
           {this.state.displayCity ? <h3>Lat: {this.state.lat}, Lon: {this.state.lon}</h3> : ''}
         </article>
         <footer> Made By: Charlie Fadness</footer>
