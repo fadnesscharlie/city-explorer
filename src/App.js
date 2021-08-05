@@ -29,9 +29,9 @@ class App extends React.Component {
       //   Variable                get     server/wesbite
       let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&format=json`);
 
-      let myData = await axios.get(`http://localhost:3001/weather?city_name=${weatherInfo}`);
+      let myData = await axios.get(`${process.env.SERVER}/weather?city_name=${weatherInfo}`);
  
-      let movieData = await axios.get(`http://localhost:3001/movies?query=${weatherInfo}`,{
+      let movieData = await axios.get(`${process.env.SERVER}/movies?query=${weatherInfo}`,{
         params: {
           title: '/title',
         }
