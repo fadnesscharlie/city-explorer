@@ -37,13 +37,17 @@ UML for starting City Explorer
 - CSS
 - JSX
 
-### UML for Day 1
+### UML for Day 1 - Front End, Server, API?
 
 <img src="src/img/UMI-Lab-06.png" >
 
-### UML for Day 2
+### UML for Day 2 - Front End to API
 
 <img src="src/img/uml-city-explorer-2.png" >
+
+### UML for Day 3 - Front End to Server to API
+
+<img src="src/img/front-to-server-to-api.png">
 
 ## Change Log
 
@@ -59,6 +63,10 @@ UML for starting City Explorer
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+Taylor White
+Phillip Murphy
+Alex Payne
 
 ## Name of feature: Starting City Explorer
 
@@ -79,3 +87,13 @@ Start time: 1:45pm 7/31/2021
 Finish time: 8:30pm 8/1/2021
 
 Actual time needed to complete: 8 hours
+
+## Name of feature: Calling API's
+
+Estimate of time needed to complete: 5 hours
+
+Start time: 8:45pm 8/3/2021
+
+Finish time: 11:00pm 8/4/2021
+
+Actual time needed to complete: 6 hours
