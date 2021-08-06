@@ -28,16 +28,30 @@ class App extends React.Component {
       let weatherInfo = e.target.city_name.value;
       console.log('weatherInfo', weatherInfo);
 
-      let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&format=json`);
-      console.log('cityResults', cityResults);
 
-      let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${weatherInfo}`);
-      console.log('myData',myData);
+      try {
+        let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&format=json`);
+        console.log('cityResults', cityResults);
 
-      let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${weatherInfo}`);
-      console.log('movieData',movieData);
+        let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${weatherInfo}`);
+        console.log('myData', myData);
 
+        let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${weatherInfo}`);
+        console.log('movieData', movieData);
 
+      } catch (error) {
+        console.log('Something with env keys not working');
+
+      } finally {
+        let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&format=json`);
+        console.log('cityResults', cityResults);
+
+        let myData = await axios.get(`http://localhost:3001/weather?city_name=${weatherInfo}`);
+        console.log('myData', myData);
+
+        let movieData = await axios.get(`http://localhost:3001/movies?query=${weatherInfo}`);
+        console.log('movieData', movieData);
+      
       // ,{
       //   params: {
       //     title: '/title',
@@ -63,11 +77,12 @@ class App extends React.Component {
         // Grab from city results not from state
         src: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${cityResults.data[0].lat},${cityResults.data[0].lon}&zoom=12`,
       })
+    }
     } catch (error) {
       console.log(error);
       this.setState({
         errorMessage: `Error occcured : ${error.response.data.error}, Status: ${error.response.status}`,
-        
+
       })
     }
   }
@@ -76,7 +91,7 @@ class App extends React.Component {
     return (
       <>
         <h1>Welcome to City Explorer</h1>
-       {/* Error message */}
+        {/* Error message */}
         <section>
           {this.state.errorMessage ? <h5>{this.state.errorMessage}</h5> : ''}
         </section>
