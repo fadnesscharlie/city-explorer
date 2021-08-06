@@ -1,5 +1,5 @@
 import React from 'react';
-import './Weather.css';
+// import './Movie.css';
 
 class Weather extends React.Component {
   constructor(props){
@@ -10,11 +10,18 @@ class Weather extends React.Component {
   render() {
     return (
       <>
-        {this.props.weather.map((info, idx) =>
+        {this.props.movies.map((info, idx) =>
         <h5 
         className="weatherInfo" 
         key={idx}>
-          {info.date}; {info.des}
+          {info.title}
+          {info.overview}
+          {info.votes}
+          {info.totalVotes}
+          {info.imageUrl}
+          {info.popularity}
+          {info.released}
+
           </h5>
         )}
       </>
