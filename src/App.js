@@ -26,25 +26,31 @@ class App extends React.Component {
     e.preventDefault();
     try {
       let weatherInfo = e.target.city_name.value;
-      //   Variable                get     server/wesbite
+      console.log('weatherInfo', weatherInfo);
+
       let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&format=json`);
+      console.log('cityResults', cityResults);
 
-      let myData = await axios.get(`${process.env.SERVER}/weather?city_name=${weatherInfo}`);
- 
-      let movieData = await axios.get(`${process.env.SERVER}/movies?query=${weatherInfo}`,{
-        params: {
-          title: '/title',
-        }
-      })
+      let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${weatherInfo}`);
+      console.log('myData',myData);
 
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${weatherInfo}`);
+      console.log('movieData',movieData);
+
+
+      // ,{
+      //   params: {
+      //     title: '/title',
+      //   }
+      // })
       // let movieData = await axios.get(`http://localhost:3001/movies`,{
       //   params: {
       //     title: '/title',
       //   }
       // })
-      console.log('does this work?', movieData);
-      // console.log('Weather API', myData.data)
-      // console.log('Movie API', movieData.data)
+      // console.log('does this work?', movieData);
+      console.log('Weather API', myData.data)
+      console.log('Movie API', movieData.data)
 
       this.setState({
         displayCity: true,
@@ -60,7 +66,7 @@ class App extends React.Component {
     } catch (error) {
       console.log(error);
       this.setState({
-        errorMessage: `Error occcured: ${error.response.data.error}, Status: ${error.response.status}`,
+        errorMessage: `Error occcured : ${error.response.data.error}, Status: ${error.response.status}`,
         
       })
     }
