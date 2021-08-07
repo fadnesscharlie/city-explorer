@@ -19,52 +19,31 @@ class App extends React.Component {
       name: '',
       src: '',
       weather: [],
+      movies: [],
     };
   }
 
   getCityInfo = async (e) => {
     e.preventDefault();
+    let weatherInfo = e.target.city_name.value;
+    console.log('weatherInfo', weatherInfo);
+
     try {
-      let weatherInfo = e.target.city_name.value;
-      console.log('weatherInfo', weatherInfo);
+      let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&lat=${this.state.lat}$lon=${this.state.lon}&format=json`);
+      console.log('cityResults', cityResults);
 
-
-      try {
-        let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&format=json`);
-        console.log('cityResults', cityResults);
-
-        let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${weatherInfo}`);
-        console.log('myData', myData);
-
-        let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${weatherInfo}`);
-        console.log('movieData', movieData);
-
-      } catch (error) {
-        console.log('Something with env keys not working');
-
-      } finally {
-        let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&format=json`);
-        console.log('cityResults', cityResults);
-
-        let myData = await axios.get(`http://localhost:3001/weather?city_name=${weatherInfo}`);
-        console.log('myData', myData);
-
-        let movieData = await axios.get(`http://localhost:3001/movies?query=${weatherInfo}`);
-        console.log('movieData', movieData);
+      let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${weatherInfo}`);
+      console.log('myData', myData);
       
-      // ,{
-      //   params: {
-      //     title: '/title',
-      //   }
-      // })
-      // let movieData = await axios.get(`http://localhost:3001/movies`,{
-      //   params: {
-      //     title: '/title',
-      //   }
-      // })
-      // console.log('does this work?', movieData);
+      try {
+        let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${weatherInfo}`);
+        console.log('does this work?', movieData.data);
+      } catch (error) {
+        console.log('Getting movie data error');
+      }
+
       console.log('Weather API', myData.data)
-      console.log('Movie API', movieData.data)
+      console.log('Movie API', this.state.movies.data)
 
       this.setState({
         displayCity: true,
@@ -72,12 +51,13 @@ class App extends React.Component {
         lat: cityResults.data[0].lat,
         name: cityResults.data[0].display_name,
         weather: myData.data,
-        movies: movieData.data,
+        // movies: movieData.data,
+        // movies: movieData.data,
 
         // Grab from city results not from state
         src: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${cityResults.data[0].lat},${cityResults.data[0].lon}&zoom=12`,
       })
-    }
+
     } catch (error) {
       console.log(error);
       this.setState({
@@ -144,3 +124,15 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+// this makes it so you dont have to use async and await
+
+// axios.get.....
+// .then(call back function, variable is what is stored)
+
+// OR (just to satisfy the promise)
+
+// .catch, catch method
+//.catch(console.error);
+
