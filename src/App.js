@@ -39,7 +39,7 @@ class App extends React.Component {
       // let movieData = await axios.get(`${process.env.REACT_APP_LOCAL_KEY}/movies?query=${cityChoice}`);
 
       console.log('does this work?', movieData.data);
-
+ 
       this.setState({
         displayCity: true,
         lon: cityResults.data[0].lon,
