@@ -5,7 +5,7 @@ import Weather from './Weather.js';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Movies from './Movies.js';
+import Movies from './Movies.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,25 +25,20 @@ class App extends React.Component {
 
   getCityInfo = async (e) => {
     e.preventDefault();
-    let weatherInfo = e.target.city_name.value;
-    console.log('weatherInfo', weatherInfo);
+    let cityChoice = e.target.city_name.value;
 
     try {
-      let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${weatherInfo}&lat=${this.state.lat}$lon=${this.state.lon}&format=json`);
-      console.log('cityResults', cityResults);
+      let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${cityChoice}&lat=${this.state.lat}$lon=${this.state.lon}&format=json`);
 
-      let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${weatherInfo}`);
-      console.log('myData', myData);
-      
-      try {
-        let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${weatherInfo}`);
-        console.log('does this work?', movieData.data);
-      } catch (error) {
-        console.log('Getting movie data error');
-      }
+      let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${cityChoice}`);
 
-      console.log('Weather API', myData.data)
-      console.log('Movie API', this.state.movies.data)
+      // ###### HEROKU ########
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${cityChoice}`);
+
+      // ####### LOCAL ##########
+      // let movieData = await axios.get(`${process.env.REACT_APP_LOCAL_KEY}/movies?query=${cityChoice}`);
+
+      console.log('does this work?', movieData.data);
 
       this.setState({
         displayCity: true,
@@ -51,8 +46,7 @@ class App extends React.Component {
         lat: cityResults.data[0].lat,
         name: cityResults.data[0].display_name,
         weather: myData.data,
-        // movies: movieData.data,
-        // movies: movieData.data,
+        movies: movieData.data,
 
         // Grab from city results not from state
         src: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${cityResults.data[0].lat},${cityResults.data[0].lon}&zoom=12`,
@@ -61,7 +55,7 @@ class App extends React.Component {
     } catch (error) {
       console.log(error);
       this.setState({
-        errorMessage: `Error occcured : ${error.response.data.error}, Status: ${error.response.status}`,
+        errorMessage: `Error occcured : ${error}, Status: ${error}`,
 
       })
     }
@@ -91,14 +85,6 @@ class App extends React.Component {
           </Form.Group>
         </Form>
 
-        {/* Weather component to display the three days of weather */}
-        <Weather
-          weather={this.state.weather}
-        />
-        {/* <Movies 
-        movies={this.state.movies}
-        /> */}
-
         <article>
           {/* If the user types a correct city, show the name */}
           {this.state.displayCity ? <h3>Your Chosen City: {this.state.name}</h3> : ''}
@@ -116,6 +102,13 @@ class App extends React.Component {
           {/* If the user types a correct city, show the location through latitude and longitude */}
           {this.state.displayCity ? <h3>Lat: {this.state.lat}, Lon: {this.state.lon}</h3> : ''}
         </article>
+
+        <Weather
+          weather={this.state.weather}
+        />
+  
+          {this.state.movies ? <Movies movies={this.state.movies} /> : ''}
+
 
         <footer> Made By: Charlie Fadness</footer>
       </>
