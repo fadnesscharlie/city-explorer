@@ -1,0 +1,9 @@
+section {
+  width: 800px;
+  margin: auto;
+  /* width: max-content; */
+}
+
+.caption {
+  background-color: rgb(180, 178, 178), 3;
+}
