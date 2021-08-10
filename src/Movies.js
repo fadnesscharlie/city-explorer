@@ -11,7 +11,7 @@ class Movies extends React.Component {
   renderWeather = () => {
     let movieArr = this.props.movies.map((info, idx) => {
       return (
-        <Carousel.Item>
+        <Carousel.Item key={idx}>
         <img
           className="d-block w-100"
           src={info.imageUrl}

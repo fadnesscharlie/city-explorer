@@ -67,6 +67,8 @@ UML for starting City Explorer
 Taylor White
 Phillip Murphy
 Alex Payne
+TA
+Ryan Galloway
 
 ## Name of feature: Starting City Explorer
 
@@ -95,5 +97,15 @@ Estimate of time needed to complete: 5 hours
 Start time: 8:45pm 8/3/2021
 
 Finish time: 11:00pm 8/4/2021
+
+Actual time needed to complete: 6 hours
+
+## Name of feature: ReFactoring
+
+Estimate of time needed to complete: 7 hours
+
+Start time: 1pm 8/7/2021
+
+Finish time: 6:30pm 8/7/2021
 
 Actual time needed to complete: 6 hours
