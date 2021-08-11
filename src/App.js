@@ -57,14 +57,14 @@ class App extends React.Component {
       let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`);
 
       // Send Data to Backend
-      let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city=${this.state.city}&lat=${this.state.lat}&lon=${this.state.lon}`);
+      // let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
 
       this.setState({
         displayCity: true,
         lon: cityResults.data[0].lon,
         lat: cityResults.data[0].lat,
         name: cityResults.data[0].display_name,
-        weather: myData.data,
+        // weather: myData.data,
         errorMessage: '',
       })
 
@@ -76,9 +76,17 @@ class App extends React.Component {
     }
   };
 
+  getMapData = async (e) => {
+    let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
+    this.setState({
+      weather: myData.data,
+    })
+  }
+
   // Run multiple functions in onSubmit
   functionCall = (e) => {
     e.preventDefault();
+    this.getMapData(e);
     this.getMovieData(e);
     this.getWeatherData(e);
   }
