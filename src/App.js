@@ -86,9 +86,9 @@ class App extends React.Component {
   // Run multiple functions in onSubmit
   functionCall = (e) => {
     e.preventDefault();
+    this.getWeatherData(e);
     this.getMapData(e);
     this.getMovieData(e);
-    this.getWeatherData(e);
   }
 
   render() {
