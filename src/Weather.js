@@ -36,7 +36,7 @@ class Weather extends React.Component {
             className="weatherInfo"
             key={idx}>
             <ListGroup.Item variant="success">
-              {info.date}; {info.des}
+              {info.time}; {info.forecast}
             </ListGroup.Item>
           </ListGroup>
         )}
