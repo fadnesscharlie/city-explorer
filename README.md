@@ -49,6 +49,10 @@ UML for starting City Explorer
 
 <img src="src/img/front-to-server-to-api.png">
 
+### UML for Day 5 - Cache
+
+<img src="src/img/cache-UML-Lab-10.png">
+
 ## Change Log
 
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:

@@ -34,7 +34,7 @@ class App extends React.Component {
     e.preventDefault();
     try {
       // Movie API Call
-      let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${this.state.city}`);
+      let movieData = await axios.get(`${process.env.REACT_APP_LOCAL_KEY}/movies?query=${this.state.city}`);
 
       this.setState({
         movies: movieData.data,
@@ -56,15 +56,11 @@ class App extends React.Component {
       // Get Map API Call
       let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`);
 
-      // Send Data to Backend
-      // let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
-
       this.setState({
         displayCity: true,
         lon: cityResults.data[0].lon,
         lat: cityResults.data[0].lat,
         name: cityResults.data[0].display_name,
-        // weather: myData.data,
         errorMessage: '',
       })
 
@@ -77,7 +73,9 @@ class App extends React.Component {
   };
 
   getMapData = async (e) => {
-    let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
+    // Weather API Call
+    let myData = await axios.get(`${process.env.REACT_APP_LOCAL_KEY}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
+
     this.setState({
       weather: myData.data,
     })
@@ -123,7 +121,6 @@ class App extends React.Component {
 
 export default App;
 
-
 // this makes it so you dont have to use async and await
 
 // axios.get.....
@@ -133,55 +130,3 @@ export default App;
 
 // .catch, catch method
 //.catch(console.error);
-
-
-
-
-
-
-// getCityInfo = async (e) => {
-//   e.preventDefault();
-//   // city_name is ID we gave form
-//   let cityChoice = e.target.city_name.value;
-//   console.log(cityChoice);
-
-//   try {
-//     console.log('Inside Try of Function');
-//     // let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&city=${cityChoice}&lat=${this.state.lat}$lon=${this.state.lon}&format=json`);
-
-//     let cityResults = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${cityChoice}&format=json`);
-//     console.log('cityResults', cityResults);
-
-//     // ####### LOCAL ##########
-//     let movieData = await axios.get(`${process.env.REACT_APP_LOCAL_KEY}/movies?query=${cityChoice}`);
-//     console.log('movieData', movieData);
-
-//     let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?city_name=${cityChoice}`);
-//     console.log('myData', myData);
-
-//     // ###### HEROKU ########
-//     // let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${cityChoice}`);
-//     console.log('does this work?', movieData.data);
-
-//     this.setState({
-//       displayCity: true,
-//       city: cityChoice,
-//       lon: cityResults.data[0].lon,
-//       lat: cityResults.data[0].lat,
-//       name: cityResults.data[0].display_name,
-//       weather: myData.data,
-//       movies: movieData.data,
-//       errorMessage: '',
-
-//       // Grab from city results not from state
-//       src: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${cityResults.data[0].lat},${cityResults.data[0].lon}&zoom=12`,
-//     })
-
-//   } catch (error) {
-//     console.log(error);
-//     this.setState({
-//       errorMessage: `Error occcured : ${error}, Status: ${error}`,
-
-//     })
-//   }
-// }
