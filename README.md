@@ -73,6 +73,7 @@ Phillip Murphy
 Alex Payne
 TA
 Ryan Galloway
+Willem Jacobs
 
 ## Name of feature: Starting City Explorer
 
@@ -116,10 +117,10 @@ Actual time needed to complete: 6 hours
 
 ## Name of feature: API Response
 
-Estimate of time needed to complete:
+Estimate of time needed to complete: 4 hours
 
 Start time: 8:30pm 8/10/2021
 
 Finish time: 9:30pm 8/11/2021
 
-Actual time needed to complete:
+Actual time needed to complete: 

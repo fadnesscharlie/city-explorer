@@ -1,6 +1,7 @@
 import React from 'react';
 import './Movie.css';
 import Carousel from 'react-bootstrap/Carousel';
+import Movie from './Movie';
 
 class Movies extends React.Component {
   constructor(props) {
@@ -12,19 +13,7 @@ class Movies extends React.Component {
     let movieArr = this.props.movies.map((info, idx) => {
       return (
         <Carousel.Item key={idx}>
-          <img
-            className="d-block w-100"
-            src={info.imageUrl}
-            alt={info.title}
-          />
-          <Carousel.Caption className="caption">
-            <h2>{info.title}</h2>
-            <p>{info.released}</p>
-            <p>{info.overview}</p>
-            <p>{info.votes}</p>
-            <p>{info.totalVotes}</p>
-            <p>{info.popularity}</p>
-          </Carousel.Caption>
+          <Movie info={info} />
         </Carousel.Item>
       )
     })
@@ -34,14 +23,11 @@ class Movies extends React.Component {
   render() {
     return (
       <section>
-
-        {this.props.displayMovies ? 
-        <Carousel fade>
-          {this.renderWeather()}
-        </Carousel> 
-        : ''}
-
-
+        {this.props.displayMovies ?
+          <Carousel fade>
+            {this.renderWeather()}
+          </Carousel>
+          : ''}
       </section>
     )
   }
