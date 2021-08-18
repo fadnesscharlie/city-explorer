@@ -17,11 +17,13 @@ If you do not set your own key from LocationIQ, it will return an error.
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? 
 -->
 
-- Pull down from this Repo
+- Pull down/clone from this Repo
 - Do `npm i` to install all the nessessary packages inside this react file while in your terminal
 - Create a .env file
-  - Place your key from LocationIQ inside .env file as:
-    - `REACT_APP_`Variable Name All Caps`=`LocationIQ Key
+  - Follow the sample.env for reference
+  - Place your key:
+    - LocalHost
+    - LocationIQ
 - Load to netify through GitHub or run local host
 
 ## Architecture
