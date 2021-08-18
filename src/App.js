@@ -34,7 +34,7 @@ class App extends React.Component {
     e.preventDefault();
     try {
       // Movie API Call
-      let movieData = await axios.get(`${process.env.REACT_APP_LOCAL_KEY}/movies?query=${this.state.city}`);
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/movies?query=${this.state.city}`);
 
       this.setState({
         movies: movieData.data,
@@ -74,7 +74,7 @@ class App extends React.Component {
 
   getMapData = async (e) => {
     // Weather API Call
-    let myData = await axios.get(`${process.env.REACT_APP_LOCAL_KEY}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
+    let myData = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/weather?lat=${this.state.lat}&lon=${this.state.lon}`);
 
     this.setState({
       weather: myData.data,
